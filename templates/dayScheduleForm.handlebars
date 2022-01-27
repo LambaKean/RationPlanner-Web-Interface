@@ -1,0 +1,58 @@
+<div class="container" data-template="dayScheduleForm">
+
+    <div class="blur"></div>
+
+    <div class="new-ingredient-form">
+
+        <div class="elements-row">
+            <div class="form-title">Расписание на {{displayableDate}}</div>
+        </div>
+
+        {{#if schedules}}
+            <div class="elements-row schedules-list">
+                <div class="schedules-list-row header-row">
+                    <div class="sch-name">Название дня</div>
+                    <div class="sch-price">Траты</div>
+                    <div class="sch-start">Начало</div>
+                    <div class="sch-repeat">Повторение</div>
+                </div>
+
+                <div class="actual-list">
+                    {{#each schedules}}
+                        <a href="/plannedDay/{{plannedDay.id}}">
+                            <div class="schedules-list-row">
+                                <div class="sch-name">{{plannedDay.name}}</div>
+                                <div class="sch-price">{{roundedPrice plannedDay.price}}р.</div>
+                                <div class="sch-start">{{startDate.day}}.{{startDate.month}}.{{startDate.year}}</div>
+
+                                {{#if nextRepeatAfterDays}}
+                                    <div class="sch-repeat">раз в {{nextRepeatAfterDays}} дн.</div>
+                                {{else}}
+                                    <div class="sch-repeat">не повторять</div>
+                                {{/if}}
+
+
+                                <div class="delete-schedule-button" data-schedule-id="{{id}}"></div>
+                            </div>
+                        </a>
+                    {{/each}}
+                </div>
+            </div>
+        {{else}}
+            <div class="elements-row">
+                На выбранную дату не назначено никакое расписание
+            </div>
+
+        {{/if}}
+
+        <div class="elements-row form-controls-row">
+            <div class="errors" id="errors"></div>
+
+            <div class="buttons">
+                <input type="button" class="button red-button" value="Назад" id="close-form-button">
+                <input type="button" class="button" value="Добавить" id="add-schedule-button" data-day="{{day}}">
+            </div>
+        </div>
+
+    </div>
+</div>

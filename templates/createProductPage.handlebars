@@ -1,0 +1,38 @@
+<div class="container">
+
+
+    <div class="new-product-row">
+        <div class="row-caption size-14"><label for="name">Название</label></div>
+        <input type="text" id="name">
+    </div>
+
+    <div class="new-product-row">
+        <div class="row-caption size-14"><label for="producer">Производитель</label></div>
+        <input type="text" id="producer">
+    </div>
+
+    <div class="new-product-row">
+        <div class="row-caption size-14"><label for="quantity-amount">Количество</label></div>
+        <input type="number" id="quantity-amount" class="quantity-input">
+        <select name="quantity-name" id="quantity-name" class="quantity-select">
+            {{#each measurementUnits}}
+                <option value="{{id}}">{{name}}</option>
+            {{/each}}
+        </select>
+    </div>
+
+    <div class="new-product-row">
+        <div class="row-caption size-14"><label for="price">Цена</label></div>
+        <input type="number" id="price" class="price-input">
+        <div class="row-caption size-14">руб.</div>
+    </div>
+
+    <div class="new-product-row">
+        <input id="saveButton" type="button" class="button" value="Сохранить">
+    </div>
+
+    <div class="new-product-row">
+        <div id="errors" class="errors"></div>
+    </div>
+
+</div>

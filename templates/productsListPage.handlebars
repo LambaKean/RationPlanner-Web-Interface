@@ -1,0 +1,33 @@
+<div class="container" data-template="productsListPage">
+    {{#if products}}
+    <div class="products-list">
+        <div class="product-link">
+            <div class="product-row head">
+                <div class="product-name">Имя</div>
+                <div class="product-producer">Производитель</div>
+                <div class="product-quantity">Количество</div>
+                <div class="product-price">Цена</div>
+            </div>
+        </div>
+
+        <div class="actual-list">
+        {{#each products}}
+            <a id="{{id}}" class="product-link" href="/product/{{id}}">
+                <div class="product-row">
+                    <div class="product-name">{{name}}</div>
+                    <div class="product-producer">{{producer}}</div>
+                    <div class="product-quantity">{{quantity.amount}} {{quantity.measurementUnit.name}}</div>
+                    <div class="product-price">{{price}} руб.</div>
+                </div>
+            </a>
+        {{/each}}
+        </div>
+
+        <a href="/product/new" class="size-12 blue-link mt-20 ml-20">Добавить</a>
+    </div>
+    {{else}}
+        <div class="size-14">Вы ещё не добавили ни один продукт в свой список</div>
+        <a href="/product/new" class="size-12 blue-link mt-20">Добавить</a>
+    {{/if}}
+    
+</div>

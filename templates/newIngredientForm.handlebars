@@ -1,0 +1,43 @@
+<div data-template="newIngredientForm" {{#if index includeZero=true}}data-product-index="{{index}}"{{/if}}>
+
+    <div class="blur"></div>
+
+    <div class="new-ingredient-form">
+        <div class="elements-row">
+            <label class="caption" for="ingredient-name">Название</label>
+            <input class="standard-input" type="text" name="ingredient-name" id="ingredient-name" value="{{ingredient.name}}">
+        </div>
+
+        <div class="elements-row">
+            <label class="caption" for="ingredient-quantity">Количество</label>
+            <input class="standard-input" type="number" name="ingredient-quantity" id="ingredient-quantity" value="{{ingredient.productQuantity.amount}}">
+            <select class="standard-input" name="ingredient-measurement-unit" id="ingredient-measurement-units">\
+                {{#each measurementUnits}}
+                    <option value="{{id}}" {{#if_eq id ../ingredient.productQuantity.measurementUnit.id}}selected{{/if_eq}}>{{name}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="elements-row">
+            <label for="ingredient-products" class="caption">Продукт</label>
+            <select class="standard-input" name="ingredient-product" id="ingredient-products">
+                <option value>-</option>
+                {{#each products}}
+                    <option
+                            value="{{id}}"
+                            data-measurement-unit-id="{{quantity.measurementUnit.id}}"
+                            {{#if_eq id ../ingredient.product.id}}selected{{/if_eq}}>
+                        {{name}} - {{producer}} - {{quantity.amount}} {{quantity.measurementUnit.name}}
+                    </option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="elements-row flex-end">
+            <input type="button" class="button red-button" id="close-form-button" value="Отмена">
+            <input type="button" class="button ml-20" id="append-ingredient-button" value="Сохранить">
+        </div>
+
+        <div id="new-ingredient-errors" class="elements-row flex-end errors mt-10"></div>
+    </div>
+</div>

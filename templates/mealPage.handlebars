@@ -1,0 +1,42 @@
+<div class="container" data-template="mealPage">
+
+    <div class="meal-photo">
+        <img src="/meal-image-placeholder.png" alt="Meal">
+    </div>
+
+    <div class="main-info">
+        <div class="meal-name">{{name}}</div>
+        {{#if_any cookingDuration.hours cookingDuration.minutes}}
+            <div class="cooking-time">
+                Время приготовления:
+                {{#if cookingDuration.hours}}{{cookingDuration.hours}} ч. {{/if}}
+                {{#if cookingDuration.minutes}}{{cookingDuration.minutes}} мин.{{/if}}
+            </div>
+        {{/if_any}}
+        {{#if price}}<div class="meal-price">Цена: {{roundedPrice price}} руб.</div>{{/if}}
+    </div>
+
+    <div class="meal-description">{{description}}</div>
+
+    {{#if ingredients}}
+        <div class="ingredients-list-title">Ингридиенты</div>
+        <ul class="ingredients">
+            {{#each ingredients}}
+                <li class="ingredient">{{name}}
+                    - {{productQuantity.amount}} {{productQuantity.measurementUnit.name}}
+                    {{#if product}}- {{roundedPrice price}} руб. <a class="blue-link ingredient-product-link" href="/product/{{product.id}}">продукт</a>{{/if}}
+                </li>
+            {{/each}}
+        </ul>
+    {{/if}}
+
+    {{#if recipe}}
+        <div class="recipe-title">Рецепт</div>
+        <div class="recipe">{{recipe}}</div>
+    {{/if}}
+
+    <input id="delete-button" type="button" class="button red-button" value="Удалить">
+
+    <div id="errors" class="errors"></div>
+
+</div>

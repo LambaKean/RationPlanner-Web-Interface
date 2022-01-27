@@ -1,0 +1,30 @@
+<div class="container" data-template="plannedDayPage">
+
+    <div class="name">Название: {{name}}</div>
+    <div class="price">Цена: {{roundedPrice price}}р.</div>
+
+    <div class="meals-list-title">Блюда: {{#if plannedDayMeals}}{{else}}не выбраны{{/if}}</div>
+
+    {{#if plannedDayMeals}}
+        <div class="meals-container" id="meals-container">
+            <div class="meal-row header">
+                <div class="time">Время</div>
+                <div class="meal-name">Название блюда</div>
+            </div>
+            {{#each plannedDayMeals}}
+                <a class="reset" href="/meal/{{meal.id}}">
+                    <div class="meal-row actual-meal">
+                        <div class="time">{{time.hours}}:{{time.minutes}}</div>
+                        <div class="meal-name">{{meal.name}}</div>
+                    </div>
+                </a>
+            {{/each}}
+        </div>
+    {{/if}}
+
+    <div class="delete-button-row">
+        <input id="delete-button" type="button" class="button red-button" value="Удалить">
+    </div>
+
+    <div class="errors" id="errors"></div>
+</div>

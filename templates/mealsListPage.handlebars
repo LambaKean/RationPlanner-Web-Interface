@@ -1,0 +1,31 @@
+<div class="container" data-template="mealsListPage">
+    {{#if meals}}
+        <div class="meal-cards-container">
+            {{#each meals}}
+                <div class="meal-card" data-meal-id="{{id}}">
+                    <div class="meal-image">
+                        <img src="/meal-image-placeholder.png" alt="Meal">
+                    </div>
+                    <div class="meal-text">
+                        <div class="meal-name">{{name}}</div>
+                        <div class="meal-info-row">
+                            {{#if_any cookingDuration.hours cookingDuration.minutes}}
+                                <p>
+                                    {{#if cookingDuration.hours}}{{cookingDuration.hours}} ч. {{/if}}
+                                    {{#if cookingDuration.minutes}}{{cookingDuration.minutes}} мин.{{/if}}
+                                </p>
+                            {{/if_any}}
+                            {{#if price}}
+                                <p class="ml-5">{{roundedPrice price}} р.</p>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <div class="message size-14">Вы пока не добавили ни одно блюдо.</div>
+    {{/if}}
+
+    <a href="/meal/new" class="size-12 blue-link mt-20 {{#if meals}}ml-20{{/if}}">Добавить</a>
+</div>

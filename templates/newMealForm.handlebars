@@ -1,0 +1,36 @@
+<div class="container" data-template="newMealForm">
+
+    <div class="blur"></div>
+
+    <div class="new-ingredient-form">
+
+        <div class="elements-row">
+            <label class="caption" for="hours">Время</label>
+            <input type="number" id="hours" name="hours" value="00">
+            <label for="hours">ч</label>
+            <input type="number" id="minutes" name="minutes" value="00">
+            <label for="minutes">м</label>
+        </div>
+
+        <div class="elements-row">
+            <label for="new-meal" class="caption">Блюдо</label>
+            <select class="standard-input" name="new-meal" id="new-meal">
+                {{#if meals}}
+                    {{#each meals}}
+                        <option value="{{id}}">{{name}}</option>
+                    {{/each}}
+                {{else}}
+                    <option value>-</option>
+                {{/if}}
+            </select>
+        </div>
+
+        <div class="elements-row flex-end">
+            <input type="button" class="button red-button" id="close-form-button" value="Отмена">
+            <input type="button" class="button ml-20" id="append-meal-button" value="Сохранить">
+        </div>
+
+        <div id="new-meal-errors" class="elements-row flex-end errors mt-10"></div>
+    </div>
+
+</div>

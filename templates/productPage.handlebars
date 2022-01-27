@@ -1,0 +1,17 @@
+<div class="product-page">
+    <div class="product-img-container">
+        <img src="../product-image-placeholder.png" alt="Изображение продукта">
+    </div>
+    <div class="product-data">
+        <div class="product-name">{{name}}</div>
+        {{#if producer}}
+            <div class="product-info">Производитель: {{producer}}</div>
+        {{/if}}
+        <div class="product-info">Кол-во продукта: {{quantity.amount}} {{quantity.measurementUnit.name}}</div>
+        <div class="product-info">Цена: {{price}} руб.</div>
+    </div>
+    <div class="buttons">
+        <input type="button" class="button red-button" id="delete-button" value="Удалить">
+    </div>
+    <div id="errors" class="errors"></div>
+</div>

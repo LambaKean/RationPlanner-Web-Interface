@@ -1,0 +1,51 @@
+<div class="container" data-template="createScheduleForm">
+
+    <div class="blur"></div>
+
+    <div class="new-ingredient-form">
+        <div class="elements-row">
+            <div class="form-title">Изменение расписания</div>
+        </div>
+
+        <div class="elements-row">
+            <label class="caption" for="day">Дата</label>
+            <div class="right-side date">
+                <input type="number" class="standard-input" value="{{date.day}}" id="day" placeholder="31">
+                <input type="number" class="standard-input" value="{{date.month}}" id="month" placeholder="12">
+                <input type="number" class="standard-input" value="{{date.year}}" id="year" placeholder="2022"> г.
+            </div>
+        </div>
+
+        <div class="elements-row">
+            <label class="caption" for="planned-day-select">День</label>
+
+            <div class="right-side">
+                <select id="planned-day-select">
+                    {{#each plannedDays}}
+                        <option value="{{id}}">{{name}}</option>
+                    {{else}}
+                        <option value>-</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+
+        <div class="elements-row">
+            <label class="caption" for="repeat">Повторять</label>
+
+            <div class="right-side">
+                Каждые <input type="number" id="repeat" class="standard-input" placeholder="-"> д.
+            </div>
+        </div>
+
+        <div class="elements-row form-controls-row">
+            <input type="button" class="button red-button" value="Отмена" id="close-form-button">
+            <input type="button" class="button" value="Сохранить" id="save-schedule-button">
+        </div>
+
+        <div class="elements-row">
+            <div class="errors" id="errors"></div>
+        </div>
+
+    </div>
+</div>

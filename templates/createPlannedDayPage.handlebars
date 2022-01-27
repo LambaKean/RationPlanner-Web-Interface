@@ -1,0 +1,32 @@
+<div class="container" data-template="createPlannedDayPage">
+
+    <div class="row">
+        <div class="row-title"><label for="name">Имя</label></div>
+        <input type="text" id="name" name="name" class="standard-input">
+    </div>
+
+    <div class="row">
+        <div class="row-title">Блюда</div>
+        <div class="meals-container" id="meals-container">
+            <div class="meal-row header">
+                <div class="time">Время</div>
+                <div class="meal-name">Название блюда</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row plus-button-row">
+        <input type="button" class="button" id="plus-button" value="+">
+    </div>
+
+    <div class="row">
+        <div class="row-title"></div>
+        <input type="button" class="button" id="save-button" value="Сохранить">
+    </div>
+
+    <div class="row errors-row">
+        <div class="row-title"></div>
+        <div class="errors" id="errors"></div>
+    </div>
+
+</div>

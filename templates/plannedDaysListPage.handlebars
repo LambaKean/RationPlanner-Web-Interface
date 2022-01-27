@@ -1,0 +1,32 @@
+<div class="container" data-template="plannedDaysListPage">
+
+    {{#if plannedDays}}
+        <div class="products-list">
+            <div class="product-link">
+                <div class="product-row head">
+                    <div class="product-name">Название</div>
+                    <div class="product-producer">Кол-во блюд</div>
+                    <div class="product-quantity">Цена</div>
+                </div>
+            </div>
+
+            <div class="actual-list">
+                {{#each plannedDays}}
+                    <a id="{{id}}" class="product-link" href="/plannedDay/{{id}}">
+                        <div class="product-row">
+                            <div class="product-name">{{name}}</div>
+                            <div class="product-producer">{{amountOfMeals}}</div>
+                            <div class="product-quantity">{{roundedPrice price}}р.</div>
+                        </div>
+                    </a>
+                {{/each}}
+            </div>
+
+            <a href="/plannedDay/new" class="size-12 blue-link mt-20 ml-20">Добавить</a>
+        </div>
+    {{else}}
+        <div class="size-14">Вы ещё не создали ни один шаблон дня</div>
+        <a href="/plannedDay/new" class="size-12 blue-link mt-20">Создать</a>
+    {{/if}}
+
+</div>
