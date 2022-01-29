@@ -1,4 +1,5 @@
 import Controller from "./Controller.mjs";
+import {API_DOMAIN, API_VERSION, PROTOCOL} from "../config.mjs";
 
 export default class ProductController extends Controller {
 
@@ -46,7 +47,7 @@ export default class ProductController extends Controller {
 
         const createProductResponse = this.productService.createProduct();
 
-        if(!createProductResponse.hasExceptions()) {
+        if(createProductResponse && !createProductResponse.hasExceptions()) {
             this.router.handleRequest("/product/" + createProductResponse.body.id);
         }
     }
@@ -58,6 +59,11 @@ export default class ProductController extends Controller {
         const productResponse = this.productService.getProductById(productId);
 
         if(!productResponse.hasExceptions()) {
+
+            if(productResponse.body.photo) {
+                productResponse.body.photo.rootUrl = PROTOCOL + "://" + API_DOMAIN + "/api/" + API_VERSION + "/photo/";
+            }
+
             this.switchTemplate("productPage", productResponse.body);
 
             this.performSideTasks(context);

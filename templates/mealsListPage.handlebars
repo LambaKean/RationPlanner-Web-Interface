@@ -4,7 +4,11 @@
             {{#each meals}}
                 <div class="meal-card" data-meal-id="{{id}}">
                     <div class="meal-image">
-                        <img src="/meal-image-placeholder.png" alt="Meal">
+                        {{#if photo}}
+                            <img src="{{photo.rootUrl}}{{photo.id}}.{{photo.extension}}" alt="Изображение блюда">
+                        {{else}}
+                            <img src="../meal-image-placeholder.png" alt="Изображение блюда">
+                        {{/if}}
                     </div>
                     <div class="meal-text">
                         <div class="meal-name">{{name}}</div>

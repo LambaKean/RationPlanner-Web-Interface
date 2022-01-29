@@ -73,7 +73,7 @@ export default class Controller {
         this.userService = userService;
         this.view = view;
         this.eventListenersManager = eventListenersManager;
-        this.router = null;
+        this.router = router;
     }
 
     performSideTasks(context) {
@@ -130,6 +130,8 @@ export default class Controller {
         if(pageContentContainer) {
             pageContentContainer.innerHTML = templateHtml;
         }
+
+        this.updateNavbar();
     }
 
     appendTemplate(templateName, templateData = {}) {

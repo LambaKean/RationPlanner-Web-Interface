@@ -1,4 +1,5 @@
 import RequestContext from "./RequestContext.mjs";
+import {setUserLoginCheck, unsetUserLoginCheck} from "./entry.mjs";
 
 export default class Router {
 
@@ -96,6 +97,13 @@ export default class Router {
             const regexp = new RegExp(route.urlRegexp);
 
             if(regexp.test(url)) {
+
+                if(url === "/login" || url === "/register") {
+                    unsetUserLoginCheck();
+                } else {
+                    setUserLoginCheck();
+                }
+
                 route.handler(new RequestContext(url, route.title, historyStateAction));
 
                 return;

@@ -187,6 +187,20 @@ export default class MealService {
         const ingredients = this.newMealIngredients;
         const recipe = document.getElementById("recipe").value;
 
+        const photo = document.getElementById("photo").files[0];
+        let photoId = null;
+
+        if (photo) {
+            const uploadPhotoResponse = this.uploadPhoto(photo);
+
+            if(uploadPhotoResponse.hasExceptions()) {
+                this.exceptionsHandler.handleExceptionsDefaultWay(uploadPhotoResponse);
+                return;
+            }
+
+            photoId = uploadPhotoResponse.body.id;
+        }
+
         const mealDto = {
             name: name,
             description: description,
@@ -195,7 +209,10 @@ export default class MealService {
                 minutes: parseInt(minutes)
             },
             recipe: recipe,
-            ingredients: ingredients
+            ingredients: ingredients,
+            photo: {
+                id: photoId
+            }
         }
 
         const createMealResponse = this.apiConnector.sendRequest(
@@ -270,5 +287,13 @@ export default class MealService {
 
             this.exceptionsHandler.handleDeleteMealExceptions(response);
         }
+    }
+
+    uploadPhoto(photo) {
+
+        let data = new FormData();
+        data.append("photo", photo, photo.name);
+
+        return this.apiConnector.sendRequest("post", "/photo", data, false);
     }
 }

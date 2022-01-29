@@ -62,6 +62,20 @@ export default class ProductService {
         const measurementUnitId = document.getElementById("quantity-name").value;
         const price = document.getElementById("price").value;
 
+        const photo = document.getElementById("photo").files[0];
+        let photoId = null;
+
+        if (photo) {
+            const uploadPhotoResponse = this.uploadPhoto(photo);
+
+            if(uploadPhotoResponse.hasExceptions()) {
+                this.exceptionsHandler.handleExceptionsDefaultWay(uploadPhotoResponse);
+                return;
+            }
+
+            photoId = uploadPhotoResponse.body.id;
+        }
+
         const productDto = {
             name: name,
             producer: producer,
@@ -71,7 +85,10 @@ export default class ProductService {
                     id: measurementUnitId
                 }
             },
-            price: price
+            price: price,
+            photo: {
+                id: photoId
+            }
         };
 
         const createProductResponse = this.apiConnector.sendRequest(
@@ -99,5 +116,13 @@ export default class ProductService {
         if(response.hasExceptions()) {
             this.exceptionsHandler.handleDeleteProductExceptions(response);
         }
+    }
+
+    uploadPhoto(photo) {
+
+        let data = new FormData();
+        data.append("photo", photo, photo.name);
+
+        return this.apiConnector.sendRequest("post", "/photo", data, false);
     }
 }

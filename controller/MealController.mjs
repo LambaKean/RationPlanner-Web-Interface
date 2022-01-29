@@ -1,5 +1,6 @@
 import Controller from "./Controller.mjs";
 import {addEventListener} from "../functions.mjs";
+import {API_DOMAIN, API_VERSION, PROTOCOL} from "../config.mjs";
 
 export default class MealController extends Controller {
 
@@ -187,31 +188,29 @@ export default class MealController extends Controller {
     }
 
     loadMealsListPage(context) {
-        if(!this.userService.isUserLoggedIn()) {
-            this.switchTemplate(
-                "userNotLoggedIn",
-                {
-                    message: "Вы не можете просматривать список своих блюд, потому что не вошли в свой аккаунт."
-                }
-            );
-
-            this.performSideTasks(context);
-            return;
-        }
 
         const getCurrentUserMealsResponse = this.mealService.getCurrentUserMeals();
 
-        this.switchTemplate("mealsListPage", {meals: getCurrentUserMealsResponse.body});
+        if(!getCurrentUserMealsResponse.hasExceptions()) {
 
-        this.performSideTasks(context);
-
-        document.querySelectorAll(".meal-card").forEach(
-            (element) => {
-                element.addEventListener("click", (e) => {
-                    this.router.handleRequest("/meal/" + e.currentTarget.dataset.mealId);
-                });
+            for(let meal of getCurrentUserMealsResponse.body) {
+                if(meal.photo) {
+                    meal.photo.rootUrl = PROTOCOL + "://" + API_DOMAIN + "/api/" + API_VERSION + "/photo/";
+                }
             }
-        );
+
+            this.switchTemplate("mealsListPage", {meals: getCurrentUserMealsResponse.body});
+
+            this.performSideTasks(context);
+
+            document.querySelectorAll(".meal-card").forEach(
+                (element) => {
+                    element.addEventListener("click", (e) => {
+                        this.router.handleRequest("/meal/" + e.currentTarget.dataset.mealId);
+                    });
+                }
+            );
+        }
     }
 
     loadMealPage(context) {
@@ -221,6 +220,11 @@ export default class MealController extends Controller {
         const mealResponse = this.mealService.getMealById(mealId);
 
         if(!mealResponse.hasExceptions()) {
+
+            if(mealResponse.body.photo) {
+                mealResponse.body.photo.rootUrl = PROTOCOL + "://" + API_DOMAIN + "/api/" + API_VERSION + "/photo/";
+            }
+
             this.switchTemplate("mealPage", mealResponse.body);
 
             this.performSideTasks(context);

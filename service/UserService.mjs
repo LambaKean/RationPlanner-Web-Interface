@@ -72,7 +72,7 @@ export default class UserService {
         if(!forceUpdate
             && this.currentUser
             && this.currentUserLastUpdate
-            && (Date.now() - this.currentUserLastUpdate) / 1000 < 30) {
+            && (Date.now() - this.currentUserLastUpdate) / 1000 < 10) {
             return this.currentUser;
         }
         
@@ -96,5 +96,6 @@ export default class UserService {
 
     logout() {
         this.tokenService.removeAccessToken();
+        this.currentUser = null;
     }
 }

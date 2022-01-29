@@ -1,6 +1,10 @@
 <div class="product-page">
     <div class="product-img-container">
-        <img src="../product-image-placeholder.png" alt="Изображение продукта">
+        {{#if photo}}
+            <img src="{{photo.rootUrl}}{{photo.id}}.{{photo.extension}}" alt="Изображение продукта">
+        {{else}}
+            <img src="../product-image-placeholder.png" alt="Изображение продукта">
+        {{/if}}
     </div>
     <div class="product-data">
         <div class="product-name">{{name}}</div>

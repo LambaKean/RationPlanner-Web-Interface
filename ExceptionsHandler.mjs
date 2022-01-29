@@ -1,3 +1,5 @@
+import {unsetUserLoginCheck} from "./entry.mjs";
+
 export default class ExceptionsHandler {
 
     view = null;
@@ -29,11 +31,28 @@ export default class ExceptionsHandler {
     handleUserNotLoggedInException(response) {
         const handledException = response.getExceptionByCode("userNotLoggedIn");
 
+        this.controller.userService.logout();
+
         this.controller.switchTemplate(
             "userNotLoggedIn",
             {message: handledException.message}
-
         );
+
+        unsetUserLoginCheck();
+
+        document.getElementById("button").addEventListener("click", () => window.history.back());
+    }
+
+    handleAccessTokenExpiration(msg) {
+
+        this.controller.userService.logout();
+
+        this.controller.switchTemplate(
+            "userNotLoggedIn",
+            {message: msg}
+        );
+
+        unsetUserLoginCheck();
 
         document.getElementById("button").addEventListener("click", () => window.history.back());
     }

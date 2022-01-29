@@ -1,7 +1,11 @@
 <div class="container" data-template="mealPage">
 
     <div class="meal-photo">
-        <img src="/meal-image-placeholder.png" alt="Meal">
+        {{#if photo}}
+            <img src="{{photo.rootUrl}}{{photo.id}}.{{photo.extension}}" alt="Изображение блюда">
+        {{else}}
+            <img src="../meal-image-placeholder.png" alt="Изображение блюда">
+        {{/if}}
     </div>
 
     <div class="main-info">

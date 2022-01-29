@@ -119,4 +119,28 @@ Handlebars.registerHelper('roundedPrice', function(price) {
     return price.toFixed(0);
 });
 
+let timer;
+
+export function setUserLoginCheck() {
+
+    if(timer) {
+        unsetUserLoginCheck();
+    }
+
+    timer = window.setTimeout(
+        () => {
+            if(!userService.isUserLoggedIn()
+                && window.location.pathname !== "/login"
+                && window.location.pathname !== "/register") {
+                exceptionsHandler.handleAccessTokenExpiration("Время действия вашей сессии истекло, войдите в аккаунт заново");
+            }
+        },
+        15000
+    );
+}
+
+export function unsetUserLoginCheck() {
+    window.clearTimeout(timer);
+}
+
 router.handleRequest(window.location.pathname, "replace");

@@ -9,7 +9,7 @@ export default class ApiConnector {
         this.tokenService = tokenService;
     }
 
-    sendRequest(method, apiRootRelativeUrl, requestBodyJson = "") {
+    sendRequest(method, apiRootRelativeUrl, requestBodyJson = "", addContentTypeHeader = true) {
 
         let response;
 
@@ -28,7 +28,10 @@ export default class ApiConnector {
             xhr.setRequestHeader("Authorization", "Bearer " + this.tokenService.accessToken);
         }
 
-        xhr.setRequestHeader("Content-type", "application/json");
+        if(addContentTypeHeader) {
+            xhr.setRequestHeader("Content-type", "application/json");
+        }
+
         xhr.send(requestBodyJson);
 
         return response;
