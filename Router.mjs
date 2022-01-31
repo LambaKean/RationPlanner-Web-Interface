@@ -92,6 +92,10 @@ export default class Router {
 
     handleRequest(url, historyStateAction = "push") {
 
+        if(url.contains('/RationPlanner-Web-Interface')) {
+            url.replace("/RationPlanner-Web-Interface", "");
+        }
+        
         for(const route of this.routes) {
 
             const regexp = new RegExp(route.urlRegexp);
