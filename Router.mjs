@@ -92,7 +92,7 @@ export default class Router {
 
     handleRequest(url, historyStateAction = "push") {
 
-        if(url.contains('/RationPlanner-Web-Interface')) {
+        if(string.indexOf("/RationPlanner-Web-Interface") !== -1) {
             url.replace("/RationPlanner-Web-Interface", "");
         }
         
