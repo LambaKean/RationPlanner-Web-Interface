@@ -189,7 +189,7 @@ export default class ScheduleController extends Controller {
                         addEventListener(
                             button,
                             "click",
-                            () => this.switchPlannedDayInCell(button)
+                            (event) => this.switchPlannedDayInCell(event, button)
                         )
                     );
                 });
@@ -254,6 +254,7 @@ export default class ScheduleController extends Controller {
 
     deleteSchedule(event) {
 
+        event.preventDefault();
         event.stopPropagation();
 
         const button = event.currentTarget;
@@ -332,7 +333,9 @@ export default class ScheduleController extends Controller {
         this.renderCalendar(new Date(newYear, newMonth))
     }
 
-    switchPlannedDayInCell(button) {
+    switchPlannedDayInCell(event, button) {
+
+        event.stopPropagation();
 
         const day = button.dataset.day;
         const index = parseInt(button.dataset.index);
