@@ -81,7 +81,7 @@ scheduleService.router = router;
 Handlebars.getTemplate = function(name) {
     if (Handlebars.templates === undefined || Handlebars.templates[name] === undefined) {
         const xhr = new XMLHttpRequest();
-        xhr.open('get', '/templates/' + name + '.handlebars', false);
+        xhr.open('get', '/RationPlanner-Web-Interface/templates/' + name + '.handlebars', false);
 
         xhr.onreadystatechange = function () {
             if(xhr.readyState === 4) {
@@ -130,8 +130,8 @@ export function setUserLoginCheck() {
     timer = window.setTimeout(
         () => {
             if(!userService.isUserLoggedIn()
-                && window.location.pathname !== "/login"
-                && window.location.pathname !== "/register") {
+                && window.location.pathname !== "RationPlanner-Web-Interface/login"
+                && window.location.pathname !== "RationPlanner-Web-Interface/register") {
                 exceptionsHandler.handleAccessTokenExpiration("Время действия вашей сессии истекло, войдите в аккаунт заново");
             }
         },
